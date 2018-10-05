@@ -1,0 +1,27 @@
+"""
+Напишите реализацию функции closest_mod_5, принимающую в качестве единственного аргумента
+целое число x и возвращающую самое маленькое целое число y, такое что:
+y больше или равно x
+y делится нацело на 5
+"""
+def closest_mod_5(x):
+    if x % 5 == 0:
+        return (x)
+    else:
+        return x + 5 - x % 5
+
+"""
+Реализуйте программу, которая для заданных n и k вычисляет C(n, k).
+"""
+
+import math
+n, k = map(int, input().split())
+c = 0
+def cc(n, k):
+    if k == 0:
+        return 1
+    elif k > n:
+        return 0;
+    else:
+        return int((math.factorial(n))/(math.factorial((n-k))*math.factorial(k)))
+print(cc(n, k))

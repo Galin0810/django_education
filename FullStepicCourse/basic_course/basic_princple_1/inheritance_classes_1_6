@@ -1,0 +1,105 @@
+"""
+Вам дано описание наследования классов в следующем формате.
+<имя класса 1> : <имя класса 2> <имя класса 3> ... <имя класса k>
+Это означает, что класс 1 отнаследован от класса 2, класса 3, и т. д.
+Вам необходимо отвечать на запросы, является ли один класс предком другого класса
+"""
+
+import sys
+
+data = {}
+
+def find_ancestor(clazz, target_ancestor):
+    global data
+    for ancestor in data[clazz]:
+        if ancestor == target_ancestor:
+            return True
+        elif find_ancestor(ancestor, target_ancestor):
+            return True
+        else:
+            continue
+    return False
+
+def main():
+    n = int(sys.stdin.readline())# число клаciв
+    while n > 0:
+        line = sys.stdin.readline().rstrip()
+        if ':' in line:
+            clazz, ancestry = map(str, line.split(':'))
+            clazz = clazz.rstrip()
+            ancestors = ancestry.strip().split(' ')
+        else:
+            clazz = line
+            ancestors = []
+        if not clazz in data:
+            data[clazz] = []
+        data[clazz].extend(ancestors)
+        n = n - 1
+    # print(data)
+    q = int(sys.stdin.readline()) # кількість запитів
+    while q > 0:
+        maybe_ancestor, clazz = map(str, sys.stdin.readline().split())
+        if (maybe_ancestor == clazz) or find_ancestor(clazz, maybe_ancestor):
+            print('Yes')
+        else:
+            print('No')
+        q -= 1
+
+main()
+
+"""
+Реализуйте структуру данных, представляющую собой расширенную структуру стек.
+Необходимо поддерживать добавление элемента на вершину стека, удаление с вершины стека,
+и необходимо поддерживать операции сложения, вычитания, умножения и целочисленного деления.
+"""
+
+
+class ExtendedStack(list):
+    def sum(self):
+        top1 = list.pop(self)
+        top2 = list.pop(self)
+        s = top1 + top2
+        self.append(s)
+
+    def sub(self):
+        top1 = list.pop(self)
+        top2 = list.pop(self)
+        s = top1 - top2
+        self.append(s)
+
+    def mul(self):
+        top1 = list.pop(self)
+        top2 = list.pop(self)
+        s = top1 * top2
+        self.append(s)
+
+    def div(self):
+        top1 = list.pop(self)
+        top2 = list.pop(self)
+        s = top1 // top2
+        self.append(s)
+
+a = ExtendedStack([1, 2, 3, 4, -3, 3, 5, 10])
+a.sum()
+a.sub()
+a.mul()
+a.div()
+
+"""
+Реализуйте класс LoggableList, отнаследовав его от классов list и Loggable таким образом,
+чтобы при добавлении элемента в список посредством метода append в лог отправлялось сообщение,
+состоящее из только что добавленного элемента.
+"""
+
+import time
+class Loggable:
+    def log(self, msg):
+        print(str(time.ctime()) + ": " + str(msg))
+class LoggableList(list, Loggable):
+    n = int(input("Please enter element : "))
+    a = [1, 2, 3, 4]
+    a.append(n)
+    l = Loggable()
+    l.log(n)
+
+L = LoggableList()
