@@ -9,7 +9,7 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 FEED_EXPORT_ENCODING = 'utf-8'
-BOT_NAME = 'startups_e27'
+
 
 SPIDER_MODULES = ['startups_e27.spiders']
 NEWSPIDER_MODULE = 'startups_e27.spiders'
