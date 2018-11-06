@@ -1,0 +1,8 @@
+mydb=# create table theaters(id SERIAL PRIMARY KEY, name VARCHAR(60) NOT NULL, address VARCHAR(120) NOT NULL, rating INTEGER, description VARCHAR(180));
+CREATE TABLE
+mydb=# create table performances(id SERIAL PRIMARY KEY, name VARCHAR(60) NOT NULL, duration TIME NOT NULL, main_actors VARCHAR(60), description VARCHAR(180), reviews VARCHAR(200), rating INTEGER);
+CREATE TABLE
+mydb=# create table genres(id_performances INTEGER PRIMARY KEY, genre VARCHAR(60) NOT NULL,FOREIGN KEY(id_performances) REFERENCES performances (id) ON UPDATE CASCADE ON DELETE CASCADE);
+CREATE TABLE
+mydb=# create table schedule(id_theaters INTEGER NOT NULL,id_performances INTEGER NOT NULL, date DATE, time TIME, price MONEY NOT NULL, free_places INTEGER NOT NULL, PRIMARY KEY(id_theaters, id_performances),FOREIGN KEY (id_theaters) REFERENCES theaters (id) ON UPDATE CASCADE ON DELETE CASCADE, FOREIGN KEY (id_performances) REFERENCES performances (id) ON UPDATE CASCADE ON DELETE CASCADE);
+CREATE TABLE
